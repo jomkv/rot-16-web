@@ -7,7 +7,7 @@ function AboutCard() {
         <CardTitle>About ROT16</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 text-base text-muted-foreground">
-        <p>
+        <p className="text-justify">
           ROT16 is a letter substitution cipher that shifts each letter by 16
           positions in the alphabet. It{"'"}s a variant of the more famous ROT13
           cipher.

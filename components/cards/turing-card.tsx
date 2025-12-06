@@ -7,7 +7,7 @@ function TuringCard() {
         <CardTitle>Relevance to Turing Machine</CardTitle>
       </CardHeader>
       <CardContent className="text-base text-muted-foreground">
-        <p>
+        <p className="text-justify">
           ROT16 shares key similarities with a Turing machine. Both operate on a
           finite alphabet and follow deterministic, step-by-step processes. Like
           a Turing machine reading and writing symbols on a tape, ROT16

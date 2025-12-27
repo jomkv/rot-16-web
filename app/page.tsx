@@ -15,8 +15,12 @@ export default function Home() {
         </h1>
         <Tabs defaultValue="encrypt">
           <TabsList>
-            <TabsTrigger value="encrypt">Encrypt</TabsTrigger>
-            <TabsTrigger value="decrypt">Decrypt</TabsTrigger>
+            <TabsTrigger value="encrypt" className="cursor-pointer">
+              Encrypt
+            </TabsTrigger>
+            <TabsTrigger value="decrypt" className="cursor-pointer">
+              Decrypt
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="encrypt">
             <InputCard handleSubmit={encrypt} action="Encrypt" />

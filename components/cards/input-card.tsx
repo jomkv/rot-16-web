@@ -1,12 +1,13 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Card, CardContent } from "../ui/card";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Copy, Check } from "lucide-react";
 
 const inputSchema = z.object({
   input: z
@@ -27,6 +28,7 @@ interface InputCardProps {
 
 function InputCard({ handleSubmit, action }: InputCardProps) {
   const [output, setOutput] = useState<string>("");
+  const [copied, setCopied] = useState(false);
 
   const {
     register,
@@ -42,6 +44,15 @@ function InputCard({ handleSubmit, action }: InputCardProps) {
     const result = handleSubmit(data.input);
     reset();
     setOutput(result);
+    setCopied(false);
+  };
+
+  const copyToClipboard = async () => {
+    if (output) {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -62,12 +73,12 @@ function InputCard({ handleSubmit, action }: InputCardProps) {
             )}
           </div>
           <div className="flex gap-2">
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               {action}
             </Button>
           </div>
         </form>
-        <div>
+        <div className="relative">
           <Textarea
             placeholder="Output"
             readOnly
@@ -75,6 +86,21 @@ function InputCard({ handleSubmit, action }: InputCardProps) {
             className="cursor-default"
             value={output}
           />
+          {output && (
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="absolute top-2 right-2 cursor-pointer"
+              onClick={copyToClipboard}
+            >
+              {copied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>
